@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Список футболистов";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Гендер</th>
+                <th>Дата рождения</th>
+                <th>Команда</th>
+                <th>Страна</th>
+                <th>Редактирование</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var footballer in Model)
+            {
+                <tr>
+                    <td>@footballer.Id</td>
+                    <td>@footballer.FirstName</td>
+                    <td>@footballer.LastName</td>
+                    <td>@footballer.Gender</td>
+                    <td>@footballer.BirthDate.ToString("yyyy-MM-dd")</td>
+                    <td>@footballer.Team?.Name</td>
+                    <td>@footballer.Country</td>
+                    <td><a class="btn btn-primary" asp-controller="Home" asp-action="EditFootballer" asp-route-id="@footballer.Id">Редактировать</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+    <script src="~/js/Index.js"></script>
+</body>
